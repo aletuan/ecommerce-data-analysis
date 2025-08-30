@@ -15,11 +15,18 @@ This project analyzes e-commerce transaction data to provide business insights t
 
 ```
 ecommerce-data-analysis/
-├── EDA.ipynb               # Main analysis notebook
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-├── prompt.md              # Project prompt and requirements
-└── ecommerce_data/        # Data directory
+├── dashboard.py                    # Interactive Streamlit dashboard
+├── EDA_Refactored.ipynb           # Refactored analysis notebook
+├── EDA.ipynb                      # Original analysis notebook
+├── data_loader.py                 # Data processing module
+├── business_metrics.py            # Business metrics calculation module
+├── test_dashboard.py              # Dashboard functionality tests
+├── test_refactored_analysis.py    # Analysis verification tests
+├── requirements.txt               # Python dependencies
+├── README.md                      # This file
+├── CLAUDE.md                      # Development guidance
+├── prompt.md                      # Project requirements
+└── ecommerce_data/               # Data directory
     ├── orders_dataset.csv          # Order transactions and status
     ├── order_items_dataset.csv     # Individual items per order
     ├── products_dataset.csv        # Product catalog and categories  
@@ -67,29 +74,59 @@ ecommerce-data-analysis/
 
 2. **Choose your analysis approach**:
 
-   **Option A: Refactored Analysis (Recommended)**
+   **Option A: Interactive Dashboard (Recommended)**
+   ```bash
+   streamlit run dashboard.py
+   ```
+
+   **Option B: Refactored Jupyter Analysis**
    ```bash
    jupyter notebook EDA_Refactored.ipynb
    ```
 
-   **Option B: Original Analysis**
+   **Option C: Original Analysis**
    ```bash
    jupyter notebook EDA.ipynb
    ```
 
-3. **Configure your analysis** (EDA_Refactored.ipynb only):
-   - Set `ANALYSIS_YEAR` and `COMPARISON_YEAR` in the configuration cell
-   - Optionally filter by specific month or change order status
-   - Run all cells to generate comprehensive analysis
+3. **Configure your analysis**:
+   - **Dashboard**: Use the year filter in the top-right corner to change analysis period
+   - **Notebook**: Set `ANALYSIS_YEAR` and `COMPARISON_YEAR` in the configuration cell
+   - Run the selected option to generate comprehensive analysis
 
-## Refactored Analysis Features
+## Analysis Options
 
-### New Modular Structure
+### Interactive Dashboard (dashboard.py)
+- **Professional Interface**: Clean, business-ready dashboard with real-time filtering
+- **Layout Structure**:
+  - **Header**: Title (left) + Year filter (right) - applies globally to all charts
+  - **KPI Row**: 4 metric cards with red/green trend indicators
+    - Total Revenue, Monthly Growth, Average Order Value, Total Orders
+  - **Charts Grid (2x2)**:
+    - Revenue trend: Solid line (current) + dashed line (previous year) with grid
+    - Top 10 categories: Horizontal bar chart with blue gradient, values as $300K/$2M
+    - Geographic map: US choropleth with blue gradient revenue coding
+    - Satisfaction vs delivery: Bar chart showing rating by delivery time buckets
+  - **Bottom Cards**: Average delivery time + Review score with stars
+- **Key Features**:
+  - Year selector with automatic data filtering across all components
+  - Professional styling with uniform card heights per row
+  - Plotly charts with proper formatting ($300K instead of $300,000)
+  - Trend indicators show two decimal places with proper +/- signs
+  - Responsive design optimized for business presentations
+- **Technology**: Streamlit + Plotly for interactive visualizations
+- **Access**: Run `streamlit run dashboard.py` and open in browser
+
+### Refactored Analysis Features
+
+#### New Modular Structure
 - **data_loader.py**: Handles data loading, processing, and filtering
 - **business_metrics.py**: Calculates business metrics and creates visualizations  
 - **EDA_Refactored.ipynb**: Main analysis notebook with improved structure
+- **dashboard.py**: Professional Streamlit dashboard application
 
-### Key Improvements
+#### Key Improvements
+- **Interactive Dashboard**: Professional web interface for business stakeholders
 - **Configurable Analysis**: Easily change analysis parameters without code modification
 - **Professional Documentation**: Clear sections with business context and data dictionary
 - **Reusable Functions**: Modular code that can be applied to different datasets
