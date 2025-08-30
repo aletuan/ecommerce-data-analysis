@@ -65,14 +65,37 @@ ecommerce-data-analysis/
    pip install -r requirements.txt
    ```
 
-2. **Launch Jupyter Notebook**:
+2. **Choose your analysis approach**:
+
+   **Option A: Refactored Analysis (Recommended)**
+   ```bash
+   jupyter notebook EDA_Refactored.ipynb
+   ```
+
+   **Option B: Original Analysis**
    ```bash
    jupyter notebook EDA.ipynb
    ```
 
-3. **Run the analysis**:
-   - Execute all cells to reproduce the complete analysis
-   - Data is automatically loaded from the `ecommerce_data/` directory
+3. **Configure your analysis** (EDA_Refactored.ipynb only):
+   - Set `ANALYSIS_YEAR` and `COMPARISON_YEAR` in the configuration cell
+   - Optionally filter by specific month or change order status
+   - Run all cells to generate comprehensive analysis
+
+## Refactored Analysis Features
+
+### New Modular Structure
+- **data_loader.py**: Handles data loading, processing, and filtering
+- **business_metrics.py**: Calculates business metrics and creates visualizations  
+- **EDA_Refactored.ipynb**: Main analysis notebook with improved structure
+
+### Key Improvements
+- **Configurable Analysis**: Easily change analysis parameters without code modification
+- **Professional Documentation**: Clear sections with business context and data dictionary
+- **Reusable Functions**: Modular code that can be applied to different datasets
+- **Enhanced Visualizations**: Business-ready charts with proper formatting
+- **No Pandas Warnings**: All DataFrame operations use proper assignment methods
+- **Strategic Insights**: Automated generation of business recommendations
 
 ## Analysis Components
 
@@ -85,7 +108,14 @@ The analysis processes six interconnected datasets:
 - **Reviews**: Customer feedback and ratings (1-5 scale)
 - **Payments**: Payment method and transaction details
 
-### Analysis Workflow
+### Analysis Workflow (Refactored)
+1. **Configuration**: Set analysis parameters (year, month, order status)
+2. **Data Processing**: Automated loading and processing with data quality checks
+3. **Business Metrics**: Calculate comprehensive KPIs using reusable functions
+4. **Visualizations**: Generate professional charts with consistent formatting
+5. **Strategic Insights**: Automated recommendations based on data patterns
+
+### Original Analysis Workflow
 1. **Data Loading**: Load and examine all CSV datasets
 2. **Data Merging**: Join tables to create comprehensive sales dataset  
 3. **Revenue Analysis**: Calculate 2022 vs 2023 performance metrics
@@ -123,7 +153,13 @@ ipykernel>=6.0.0 # Jupyter kernel
 5. **Delivery Analysis**: Correlation between delivery speed and satisfaction
 
 ### Code Quality Notes
-⚠️ **Known Issues:**
+✅ **Refactored Version (EDA_Refactored.ipynb):**
+- No pandas warnings - all DataFrame operations use proper methods
+- Modular structure with separate .py files for reusable functions
+- Configurable parameters for flexible analysis
+- Professional documentation and visualizations
+
+⚠️ **Original Version (EDA.ipynb) Known Issues:**
 - Multiple `SettingWithCopyWarning` in notebook cells (lines involving DataFrame slices)
 - Consider using `.loc[]` for DataFrame assignments to avoid warnings
 - All analysis contained in single notebook - could benefit from modular structure
